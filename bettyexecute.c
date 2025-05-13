@@ -23,7 +23,7 @@ void execute(char **args)
 	{
 		if (execve(args[0], args, environ) == -1)
 		{
-			perror("execve");
+			perror("shell");
 			exit(EXIT_FAILURE);
 		}
 	}
