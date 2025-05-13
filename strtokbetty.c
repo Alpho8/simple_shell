@@ -23,24 +23,13 @@ char **tokenize(char *line)
 	}
 
 	token = strtok(line, " \t\r\n");
-	while (token != NULL)
-	{
+	if (token)
 		tokens[i++] = token;
-
-		if (i >= bufsize)
-		{
-			bufsize += 64;
-			tokens = realloc(tokens, bufsize * sizeof(char *));
-			if (!tokens)
-			{
-				perror("realloc");
-				exit(EXIT_FAILURE);
-			}
-		}
-
-		token = strtok(NULL, " \t\r\n");
+	token = strtok(NULL, " \t\r\n");
+	if (token != NULL)
+	{
+		return (NULL);
 	}
-
 	tokens[i] = NULL;
 	return (tokens);
 }

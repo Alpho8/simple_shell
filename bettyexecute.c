@@ -21,6 +21,10 @@ void execute(char **args)
 	}
 	else if (child_pid == 0)
 	{
+		if (args[0][0] != '/')
+		{
+			return;
+		}
 		if (execve(args[0], args, environ) == -1)
 		{
 			perror("shell");

@@ -19,7 +19,10 @@ int main(void)
 
 	while (1)
 	{
-		printf("$ ");
+		if (isatty(STDIN_FILENO))
+		{
+			printf("$ ");
+		}
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
@@ -28,6 +31,11 @@ int main(void)
 		}
 
 		args = tokenize(line);
+		if (strcmp(args[0], "exit") == 0)
+		{
+			free(args);
+			break;
+		}
 		if (args[0] != NULL)
 			execute(args);
 
