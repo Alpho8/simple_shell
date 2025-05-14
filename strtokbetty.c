@@ -21,15 +21,21 @@ char **tokenize(char *line)
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
-
 	token = strtok(line, " \t\r\n");
-	if (token)
-		tokens[i++] = token;
-	token = strtok(NULL, " \t\r\n");
-	if (token != NULL)
+	while (token != NULL)
 	{
-		free(tokens);
-		return (NULL);
+		tokens[i++] = token;
+		if (i >= bufsize)
+		{
+			bufsize += 64;
+			tokens = realloc(tokens, bufsize * sizeof(char *));
+			if (!token)
+			{
+				perror("realloc");
+				exit(EXIT_FAILURE);
+			}
+		}
+		token = strtok(NULL, " \t\r\n");
 	}
 	tokens[i] = NULL;
 	return (tokens);
