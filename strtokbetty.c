@@ -28,6 +28,7 @@ char **tokenize(char *line)
 	token = strtok(NULL, " \t\r\n");
 	if (token != NULL)
 	{
+		free(tokens);
 		return (NULL);
 	}
 	tokens[i] = NULL;
