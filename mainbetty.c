@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * main - Entry point of a simple shell program.
  *
@@ -21,22 +22,21 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			printf("$ ");
+			write(STDOUT_FILENO, "$", 2);
 		}
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
-			perror("getline");
 			break;
 		}
 
 		args = tokenize(line);
-		if (strcmp(args[0], "exit") == 0)
+		if (args && args[0] && _strcmp(args[0], "exit") == 0)
 		{
 			free(args);
 			break;
 		}
-		if (args[0] != NULL)
+		if (args && args[0] != NULL)
 			execute(args);
 
 		free(args);
