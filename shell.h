@@ -9,4 +9,5 @@
 extern char **environ;
 char **tokenize(char *line);
 void execute(char **args);
+int _strcmp(const char *s1, const char *s2);
 #endif
